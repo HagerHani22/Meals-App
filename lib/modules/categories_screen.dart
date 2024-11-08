@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:meals/modules/provider/app_language.dart';
+import 'package:provider/provider.dart';
 
+import '../app_localization/localization.dart';
 import '../data/dummy_data.dart';
 import '../models/category_model.dart';
 import '../models/meal_model.dart';
@@ -11,10 +14,8 @@ class CategoriesScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
     return Scaffold(
-      // appBar: AppBar(
-      //   title: const Text('Category'),
-      // ),
       body: GridView(
         gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
           crossAxisCount: 2,
@@ -62,7 +63,8 @@ Widget categoryGridItem(CategoryModel category, context,List<Meal> availableMeal
             )),
         child: Center(
             child: Text(
-          category.title,
+              AppLocalizations.of(context)!.translate(category.title) ?? category.title,
+
           style: Theme.of(context)
               .textTheme
               .titleLarge!

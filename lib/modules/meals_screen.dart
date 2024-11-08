@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:meals/modules/meal_details_screen.dart';
 import 'package:transparent_image/transparent_image.dart';
 
+import '../app_localization/localization.dart';
 import '../models/meal_model.dart';
 
 class MealsScreen extends StatelessWidget {
@@ -13,7 +15,7 @@ class MealsScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(title),
+        title: Text(AppLocalizations.of(context)!.translate(title)??title),
       ),
       body: SingleChildScrollView(
         child: Column(
@@ -26,6 +28,10 @@ class MealsScreen extends StatelessWidget {
 
 
 Widget mealsItems(Meal meal, context) {
+  final arabicDuration = formatNumberBasedOnLocale(context, meal.duration);
+  final localizedMin = AppLocalizations.of(context)!.translate('min') ?? 'min';
+
+  final displayText = '$arabicDuration $localizedMin';
   return Card(
     margin: const EdgeInsets.all(8),
     shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
@@ -60,7 +66,7 @@ Widget mealsItems(Meal meal, context) {
                   child: Column(
                     children: [
                       Text(
-                        meal.title,
+                        AppLocalizations.of(context)!.translate(meal.title)?? meal.title,
                         textAlign: TextAlign.center,
                         style: const TextStyle(fontSize: 20),
                       ),
@@ -82,8 +88,8 @@ Widget mealsItems(Meal meal, context) {
                       Icons.watch_later_outlined,
                       color: Colors.black,
                     ),
-                    label: Text(
-                      '${meal.duration} min',
+                    label: Text(displayText,
+  // AppLocalizations.of(context)!.translate('${meal.duration} ${AppLocalizations.of(context)!.translate('min')}',) ?? '${meal.duration} min',
                       style: const TextStyle(color: Colors.black),
                     )),
                 TextButton.icon(
@@ -93,7 +99,7 @@ Widget mealsItems(Meal meal, context) {
                       color: Colors.black,
                     ),
                     label: Text(
-                      meal.complexity.name,
+                      AppLocalizations.of(context)!.translate(meal.complexity.name)?? meal.complexity.name,
                       style: const TextStyle(color: Colors.black),
                     )),
                 TextButton.icon(
@@ -103,7 +109,7 @@ Widget mealsItems(Meal meal, context) {
                       color: Colors.black,
                     ),
                     label: Text(
-                      meal.affordability.name,
+                      AppLocalizations.of(context)!.translate(meal.affordability.name)?? meal.affordability.name,
                       style: const TextStyle(color: Colors.black),
                     )),
               ],
@@ -113,4 +119,17 @@ Widget mealsItems(Meal meal, context) {
       ),
     ),
   );
+}
+
+
+String formatNumberBasedOnLocale(BuildContext context, int number) {
+  final locale = Localizations.localeOf(context).languageCode;
+
+  if (locale == 'ar') {
+    // Format number in Arabic numerals
+    return NumberFormat("##", "ar_EG").format(number);
+  } else {
+    // Default English numerals
+    return number.toString();
+  }
 }

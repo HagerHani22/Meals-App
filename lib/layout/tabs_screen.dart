@@ -2,14 +2,19 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:meals/modules/filter_screen.dart';
 import 'package:meals/modules/provider/favourite_provider.dart';
+import 'package:provider/provider.dart' as provider; // Alias provider package
+import '../app_localization/localization.dart';
 import '../models/meal_model.dart';
 import '../modules/categories_screen.dart';
 import '../modules/favourite_screen.dart';
 import '../modules/main_drawer.dart';
+import '../modules/provider/app_language.dart';
 import '../modules/provider/filter_provider.dart';
 
 class TabsScreen extends ConsumerStatefulWidget {
-  TabsScreen({super.key});
+  final void Function() toggleTheme;
+  final bool isDark;
+  TabsScreen(this.toggleTheme, this.isDark, {super.key});
 
   @override
   ConsumerState<TabsScreen> createState() => _TabsScreenState();
@@ -18,6 +23,7 @@ class TabsScreen extends ConsumerStatefulWidget {
 class _TabsScreenState extends ConsumerState<TabsScreen> {
   int currentIndex = 0;
   late List<Widget> screens;
+  late AppLanguageProvider appLanguage;
 
   List<String> titles = ['Categories', 'Favourites'];
 
@@ -64,26 +70,28 @@ class _TabsScreenState extends ConsumerState<TabsScreen> {
       CategoriesScreen(availableMeals: availableMeals),
       FavouriteScreen(favouriteMeals: favouriteMeals)
     ];
+    appLanguage = provider.Provider.of<AppLanguageProvider>(context);
 
     return Scaffold(
       appBar: AppBar(
-        title: Text(titles[currentIndex]),
+        title: Text(  AppLocalizations.of(context)!.translate(titles[currentIndex])??titles[currentIndex]),
       ),
       body: screens[currentIndex],
       drawer: DrawerScreen(
-        onSelectScreen: setScreen,
+        onSelectScreen: setScreen, toggleTheme: widget.toggleTheme, isDark: widget.isDark ,
+
       ),
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: currentIndex,
         onTap: selectPage,
-        items: const [
+        items:  [
           BottomNavigationBarItem(
-            icon: Icon(Icons.set_meal),
-            label: 'Categories',
+            icon: const Icon(Icons.set_meal),
+            label:AppLocalizations.of(context)!.translate('Categories')??'Categories',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.favorite),
-            label: 'Favourites',
+            icon: const Icon(Icons.favorite),
+            label:   AppLocalizations.of(context)!.translate('Favourites')??'Favourites',
           ),
         ],
       ),

@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:meals/modules/provider/filter_provider.dart';
 
+import '../app_localization/localization.dart';
+
 class FilterScreen extends ConsumerWidget {
   const FilterScreen({super.key});
 
@@ -11,7 +13,7 @@ class FilterScreen extends ConsumerWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Filter'),
+        title: Text(AppLocalizations.of(context)!.translate('Filter')??'Filter'),
       ),
       body: WillPopScope(
         onWillPop: () async {
@@ -22,8 +24,8 @@ class FilterScreen extends ConsumerWidget {
           children: [
             customSwitch(
               context: context,
-              title: 'Gluten Free',
-              subtitle: 'Only include gluten-free meals',
+              title:  AppLocalizations.of(context)!.translate('Gluten Free')??'Gluten Free',
+              subtitle: AppLocalizations.of(context)!.translate('Only include gluten-free meals')??'Only include gluten-free meals',
               filter: filters[Filter.glutenFree]!,
               onChange: (newValue) {
                 ref.read(filterProvider.notifier).setFilter(Filter.glutenFree, newValue);
@@ -31,8 +33,8 @@ class FilterScreen extends ConsumerWidget {
             ),
             customSwitch(
               context: context,
-              title: 'Vegan',
-              subtitle: 'Only include vegan meals',
+              title: AppLocalizations.of(context)!.translate('Vegan')??'Vegan',
+              subtitle: AppLocalizations.of(context)!.translate('Only include vegan meals')??'Only include vegan meals',
               filter: filters[Filter.vegan]!,
               onChange: (newValue) {
                 ref.read(filterProvider.notifier).setFilter(Filter.vegan, newValue);
@@ -40,8 +42,8 @@ class FilterScreen extends ConsumerWidget {
             ),
             customSwitch(
               context: context,
-              title: 'Vegetarian',
-              subtitle: 'Only include vegetarian meals',
+              title: AppLocalizations.of(context)!.translate('Vegetarian')??'Vegetarian',
+              subtitle: AppLocalizations.of(context)!.translate('Only include vegetarian meals')??'Only include vegetarian meals',
               filter: filters[Filter.vegetarian]!,
               onChange: (newValue) {
                 ref.read(filterProvider.notifier).setFilter(Filter.vegetarian, newValue);
@@ -49,8 +51,8 @@ class FilterScreen extends ConsumerWidget {
             ),
             customSwitch(
               context: context,
-              title: 'Lactose Free',
-              subtitle: 'Only include lactose-free meals',
+              title: AppLocalizations.of(context)!.translate('Lactose Free')??'Lactose Free',
+              subtitle: AppLocalizations.of(context)!.translate('Only include lactose-free meals')??'Only include lactose-free meals',
               filter: filters[Filter.lactoseFree]!,
               onChange: (newValue) {
                 ref.read(filterProvider.notifier).setFilter(Filter.lactoseFree, newValue);

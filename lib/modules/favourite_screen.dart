@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:meals/modules/meals_screen.dart';
 
+import '../app_localization/localization.dart';
 import '../models/meal_model.dart';
 
 class FavouriteScreen extends StatelessWidget {
@@ -11,9 +12,9 @@ class FavouriteScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     if (favouriteMeals.isEmpty) {
-      return const Scaffold(
+      return  Scaffold(
         body: Center(
-          child: Text('No favorite meals added yet.'),
+          child: Text( AppLocalizations.of(context)!.translate('No favorite meals added yet.')??'No favorite meals added yet.'),
         ),
       );
     }

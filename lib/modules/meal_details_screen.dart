@@ -1,12 +1,14 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:meals/models/meal_model.dart';
 import 'package:meals/modules/provider/favourite_provider.dart';
 
+import '../app_localization/localization.dart';
+import 'meals_screen.dart';
+
 class MealDetailsScreen extends ConsumerWidget {
-  MealDetailsScreen({
+  const MealDetailsScreen({
     super.key,
     required this.meal,
   });
@@ -18,7 +20,7 @@ class MealDetailsScreen extends ConsumerWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text(meal.title),
+        title: Text( AppLocalizations.of(context)!.translate(meal.title) ?? meal.title),
         actions: [
           IconButton(
               onPressed: () {
@@ -45,9 +47,9 @@ class MealDetailsScreen extends ConsumerWidget {
                 fit: BoxFit.contain,
 
               ),
-              const Text(
-                'Ingredients : ',
-                style: TextStyle(
+               Text(
+                AppLocalizations.of(context)!.translate('Ingredients : ') ?? 'Ingredients : ',
+                style: const TextStyle(
                   fontSize: 24,
                   fontWeight: FontWeight.bold,
                 ),
@@ -66,7 +68,8 @@ class MealDetailsScreen extends ConsumerWidget {
                           Padding(
                             padding:
                                 const EdgeInsets.symmetric(vertical: 4.0),
-                            child: Text('${i + 1}- ${meal.ingredients[i]}'),
+                            child: Text(
+                              '${formatNumberBasedOnLocale(context, i + 1)}-${AppLocalizations.of(context)!.translate(meal.ingredients[i]) ?? meal.ingredients[i]}',)
                           ),
                       ],
                     ),
@@ -76,9 +79,9 @@ class MealDetailsScreen extends ConsumerWidget {
               const SizedBox(
                 height: 6,
               ),
-              const Text(
-                'steps : ',
-                style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+               Text(
+                AppLocalizations.of(context)!.translate( 'steps : ') ?? 'steps : ',
+                style: const TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
               ),
               Container(
                 width: double.infinity,
@@ -93,7 +96,8 @@ class MealDetailsScreen extends ConsumerWidget {
                         for (int i = 0; i < meal.steps.length; i++)
                           Padding(
                             padding: const EdgeInsets.all(4.0),
-                            child: Text('${i + 1}- ${meal.steps[i]}'),
+                            child: Text(
+                              '${formatNumberBasedOnLocale(context, i + 1)}- ${AppLocalizations.of(context)!.translate(meal.steps[i]) ?? meal.steps[i]}',)
                           ),
                       ],
                     ),
