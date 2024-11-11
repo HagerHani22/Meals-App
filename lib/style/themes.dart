@@ -30,7 +30,11 @@ ThemeData darkTheme = ThemeData.dark().copyWith(
     colorScheme: myDarkColorScheme,
     appBarTheme: const AppBarTheme().copyWith(
         backgroundColor: myDarkColorScheme.onPrimaryContainer,
-        foregroundColor: myDarkColorScheme.primaryContainer),
+        foregroundColor: myDarkColorScheme.primaryContainer,
+      actionsIconTheme: const IconThemeData(color: Colors.white),
+
+    ),
+
     cardTheme: const CardTheme().copyWith(
         color: myDarkColorScheme.secondaryContainer,
         margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 6)),

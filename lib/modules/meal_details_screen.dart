@@ -3,7 +3,8 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:meals/models/meal_model.dart';
 import 'package:meals/modules/provider/favourite_provider.dart';
-
+import 'package:meals/modules/provider/theme_provider.dart';
+import 'package:provider/provider.dart' as provider; // Alias provider package
 import '../app_localization/localization.dart';
 import 'meals_screen.dart';
 
@@ -17,6 +18,7 @@ class MealDetailsScreen extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final isFavourite = ref.watch(favouriteMealsProvider).any((element) => element.id == meal.id);
+    final themeProvider = provider.Provider.of<ThemeProvider>(context);
 
     return Scaffold(
       appBar: AppBar(
@@ -30,7 +32,8 @@ class MealDetailsScreen extends ConsumerWidget {
               },
               icon: Icon(
                 isFavourite ? Icons.favorite : Icons.favorite_border,
-                color: isFavourite ? Colors.red : Colors.black,
+                color: isFavourite ? Colors.red : Colors.white,
+
               ))
         ],
       ),
@@ -49,9 +52,10 @@ class MealDetailsScreen extends ConsumerWidget {
               ),
                Text(
                 AppLocalizations.of(context)!.translate('Ingredients : ') ?? 'Ingredients : ',
-                style: const TextStyle(
+                style:  TextStyle(
                   fontSize: 24,
                   fontWeight: FontWeight.bold,
+                  color: themeProvider.isDark ? Theme.of(context).colorScheme.inversePrimary:Colors.black,
                 ),
               ),
               Container(
@@ -80,8 +84,9 @@ class MealDetailsScreen extends ConsumerWidget {
                 height: 6,
               ),
                Text(
-                AppLocalizations.of(context)!.translate( 'steps : ') ?? 'steps : ',
-                style: const TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+                AppLocalizations.of(context)!.translate( 'Steps : ') ?? 'Steps : ',
+                style:  TextStyle(fontSize: 24, fontWeight: FontWeight.bold,
+                    color: themeProvider.isDark ? Theme.of(context).colorScheme.inversePrimary:Colors.black),
               ),
               Container(
                 width: double.infinity,

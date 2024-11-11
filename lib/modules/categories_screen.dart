@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:meals/modules/provider/app_language.dart';
+import 'package:meals/modules/provider/language_provider.dart';
+import 'package:meals/modules/provider/theme_provider.dart';
 import 'package:provider/provider.dart';
 
 import '../app_localization/localization.dart';
@@ -33,6 +34,8 @@ class CategoriesScreen extends StatelessWidget {
 }
 
 Widget categoryGridItem(CategoryModel category, context,List<Meal> availableMeals ) {
+  final themeProvider = Provider.of<ThemeProvider>(context);
+
   return Padding(
     padding: const EdgeInsets.all(8.0),
     child: InkWell(
@@ -62,14 +65,17 @@ Widget categoryGridItem(CategoryModel category, context,List<Meal> availableMeal
               end: Alignment.bottomRight,
             )),
         child: Center(
-            child: Text(
-              AppLocalizations.of(context)!.translate(category.title) ?? category.title,
+            child: Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Text(
+                AppLocalizations.of(context)!.translate(category.title) ?? category.title,
 
-          style: Theme.of(context)
-              .textTheme
-              .titleLarge!
-              .copyWith(color: Theme.of(context).colorScheme.onBackground),
-        )),
+                        style: Theme.of(context)
+                .textTheme
+                .titleLarge!
+                .copyWith(color: themeProvider.isDark ? Theme.of(context).colorScheme.inversePrimary:Theme.of(context).colorScheme.onBackground),
+                      ),
+            )),
       ),
     ),
   );

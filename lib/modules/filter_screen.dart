@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:meals/modules/provider/filter_provider.dart';
+import 'package:meals/modules/provider/theme_provider.dart';
+import 'package:provider/provider.dart' as provider; // Alias provider package
 
 import '../app_localization/localization.dart';
 
@@ -70,18 +72,20 @@ class FilterScreen extends ConsumerWidget {
     required String subtitle,
     required bool filter,
     required Function(bool newValue) onChange,
+
   }) {
+    final themeProvider = provider.Provider.of<ThemeProvider>(context);
     return SwitchListTile(
       title: Text(
         title,
         style: Theme.of(context).textTheme.titleLarge!.copyWith(
-          color: Theme.of(context).colorScheme.onBackground,
+          color: themeProvider.isDark ? Theme.of(context).colorScheme.inversePrimary:Theme.of(context).colorScheme.onBackground,
         ),
       ),
       subtitle: Text(
         subtitle,
         style: Theme.of(context).textTheme.labelLarge!.copyWith(
-          color: Theme.of(context).colorScheme.onBackground,
+          color: themeProvider.isDark ? Theme.of(context).colorScheme.inversePrimary:Theme.of(context).colorScheme.onBackground,
         ),
       ),
       value: filter,

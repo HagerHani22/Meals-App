@@ -16,14 +16,14 @@
   "Cooking Up!": "الطبخ!",
 
   "Spaghetti with Tomato Sauce": "سباغيتي مع صلصة الطماطم",
-  "Ingredients : ": "المكونات:",
+  "Ingredients : ": "المكونات : ",
   "4 Tomatoes": "4 طماطم",
   "1 Tablespoon of Olive Oil": "ملعقة طعام زيت زيتون",
   "1 Onion": "بصلة واحدة",
   "250g Spaghetti": "250 جرام سباغيتي",
   "Spices": "التوابل",
   "Cheese (optional)": "جبن (اختياري)",
-  "steps : ": "الخطوات:",
+  "Steps : ": "الخطوات : ",
   "Cut the tomatoes and the onion into small pieces.": "1-قطع الطماطم والبصل إلى قطع صغيرة.",
   "Boil some water - add salt to it once it boils.": "غلي بعض الماء - أضف الملح بمجرد أن يغلي.",
   "Put the spaghetti into the boiling water - they should be done in about 10 to 12 minutes.": "ضع السباغيتي في الماء المغلي - يجب أن تكون جاهزة في حوالي 10 إلى 12 دقيقة.",
@@ -189,6 +189,6 @@
   "English": "الانجليزية",
   "Arabic": "العربية",
   "Theme": "السمة",
-  "Dark": "داكن",
-  "Light": "فاتح"
+  "Dark Mode": "داكن",
+  "Light Mode": "فاتح"
 }

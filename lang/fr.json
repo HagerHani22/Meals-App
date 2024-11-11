@@ -23,7 +23,7 @@
   "250g Spaghetti": "250g de spaghetti",
   "Spices": "Épices",
   "Cheese (optional)": "Fromage (facultatif)",
-  "steps : ": "Étapes :",
+  "Steps : ": "Étapes :",
   "Cut the tomatoes and the onion into small pieces.": "1- Coupez les tomates et l'oignon en petits morceaux.",
   "Boil some water - add salt to it once it boils.": "Faites bouillir de l'eau - ajoutez du sel une fois qu'elle bout.",
   "Put the spaghetti into the boiling water - they should be done in about 10 to 12 minutes.": "Mettez les spaghetti dans l'eau bouillante - ils devraient être cuits en environ 10 à 12 minutes.",
@@ -188,6 +188,6 @@
   "English": "Anglais",
   "Arabic": "Arabe",
   "Theme": "Theme",
-  "Dark": "Sombre",
-  "Light": "Lumière"
+  "Dark Mode": "Sombre",
+  "Light Mode": "Lumière"
 }

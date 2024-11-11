@@ -8,7 +8,7 @@ import '../models/meal_model.dart';
 import '../modules/categories_screen.dart';
 import '../modules/favourite_screen.dart';
 import '../modules/main_drawer.dart';
-import '../modules/provider/app_language.dart';
+import '../modules/provider/language_provider.dart';
 import '../modules/provider/filter_provider.dart';
 
 class TabsScreen extends ConsumerStatefulWidget {
