@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:connectivity_wrapper/connectivity_wrapper.dart';
 import 'package:flutter/material.dart';
 
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -43,33 +44,35 @@ class MyApp extends StatelessWidget {
       ],
       child: provider.Consumer2<AppLanguageProvider,ThemeProvider>(
        builder: (context, appLanguage,themeProvider, child) {
-         return MaterialApp(
-           themeAnimationCurve: Curves.linear ,
-           themeAnimationDuration: const Duration(milliseconds: 1500),
-           title: 'Catering App',
-           themeMode:themeProvider.isDark ? ThemeMode.dark : ThemeMode.light,
-           theme: lightTheme,
-           //       theme: ThemeData(
-           //   colorScheme: ColorScheme.fromSeed(
-           //     seedColor: const Color.fromARGB(255, 132, 0, 0),
-           //   ),
-           //   useMaterial3: true,
-           //   // textTheme:GoogleFonts.latoTextTheme()
-           // ),
-           darkTheme: darkTheme,
-           home: MyHomePage( toggleTheme: themeProvider.toggleTheme, isDark: themeProvider.isDark),
-           locale: appLanguage.appLocal,
-           supportedLocales: const [
-             Locale('en', 'US'),
-             Locale('ar', 'EG'),
-             Locale('fr', 'FR'),
-           ],
-           localizationsDelegates: const [
-             AppLocalizations.delegate,
-             GlobalMaterialLocalizations.delegate,
-             GlobalWidgetsLocalizations.delegate,
-             GlobalCupertinoLocalizations.delegate,
-           ],
+         return ConnectivityAppWrapper(
+           app: MaterialApp(
+             themeAnimationCurve: Curves.linear ,
+             themeAnimationDuration: const Duration(milliseconds: 1500),
+             title: 'Catering App',
+             themeMode:themeProvider.isDark ? ThemeMode.dark : ThemeMode.light,
+             theme: lightTheme,
+             darkTheme: darkTheme,
+             builder:   (context, widget) {
+               return ConnectivityWidgetWrapper(
+                 disableInteraction: false,
+                 height: 80,
+                 child: widget!,
+               );
+             },
+             home: MyHomePage( toggleTheme: themeProvider.toggleTheme, isDark: themeProvider.isDark),
+             locale: appLanguage.appLocal,
+             supportedLocales: const [
+               Locale('en', 'US'),
+               Locale('ar', 'EG'),
+               Locale('fr', 'FR'),
+             ],
+             localizationsDelegates: const [
+               AppLocalizations.delegate,
+               GlobalMaterialLocalizations.delegate,
+               GlobalWidgetsLocalizations.delegate,
+               GlobalCupertinoLocalizations.delegate,
+             ],
+           ),
          );
        },
              ),

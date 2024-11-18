@@ -5,8 +5,8 @@ var myColorScheme =
 var myDarkColorScheme =
     ColorScheme.fromSeed(seedColor: const Color.fromARGB(255, 59, 96, 179));
 
-ThemeData lightTheme = ThemeData().copyWith(
-  useMaterial3: true,
+ThemeData lightTheme = ThemeData.light(useMaterial3: true,
+).copyWith(
   colorScheme: myColorScheme,
   appBarTheme: const AppBarTheme().copyWith(
       backgroundColor: myColorScheme.onPrimaryContainer,
@@ -25,8 +25,8 @@ ThemeData lightTheme = ThemeData().copyWith(
   iconTheme: IconThemeData(color: myColorScheme.onPrimaryContainer),
 );
 
-ThemeData darkTheme = ThemeData.dark().copyWith(
-    useMaterial3: true,
+ThemeData darkTheme = ThemeData.dark(useMaterial3: true,
+).copyWith(
     colorScheme: myDarkColorScheme,
     appBarTheme: const AppBarTheme().copyWith(
         backgroundColor: myDarkColorScheme.onPrimaryContainer,
@@ -48,10 +48,10 @@ ThemeData darkTheme = ThemeData.dark().copyWith(
         style: ElevatedButton.styleFrom(
             backgroundColor: myDarkColorScheme.primaryContainer)),
     textTheme: ThemeData().textTheme.copyWith(
-        titleLarge: TextStyle(
+        titleLarge: const TextStyle(
             fontWeight: FontWeight.normal,
             color:Colors.white,
             fontSize: 24)),
-    iconTheme: IconThemeData(color:Colors.white),
+    iconTheme: const IconThemeData(color:Colors.white),
     bottomSheetTheme: const BottomSheetThemeData()
         .copyWith(backgroundColor: myDarkColorScheme.onPrimaryContainer));

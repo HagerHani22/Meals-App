@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:meals/modules/provider/theme_provider.dart';
 import 'package:meals/modules/meals_screen.dart';
 
 import '../app_localization/localization.dart';
@@ -11,10 +13,13 @@ class FavouriteScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final themeProvider = Provider.of<ThemeProvider>(context);
     if (favouriteMeals.isEmpty) {
       return  Scaffold(
         body: Center(
-          child: Text( AppLocalizations.of(context)!.translate('No favorite meals added yet.')??'No favorite meals added yet.'),
+          child: Text( AppLocalizations.of(context)!.translate('No favorite meals added yet.')??'No favorite meals added yet.' ,
+          style: TextStyle(color: themeProvider.isDark ? Theme.of(context).colorScheme.inversePrimary:Theme.of(context).colorScheme.onBackground),
+          ),
         ),
       );
     }
