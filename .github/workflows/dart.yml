@@ -16,7 +16,9 @@ jobs:
           architecture: x64
 
       - run: flutter pub get
-
+      - run: flutter build ios --release --no-codesign
+        env:
+          FLUTTER_BUILD_MODE: release
       # Ensure the Podfile has the correct platform
       - name: Set iOS deployment target
         run: |
